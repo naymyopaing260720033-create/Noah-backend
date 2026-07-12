@@ -7,15 +7,15 @@ load_dotenv()
 API_ID = int(os.getenv("API_ID", "1234567"))
 API_HASH = os.getenv("API_HASH", "default_api_hash")
 BOT_TOKEN = os.getenv("BOT_TOKEN", "default_bot_token")
-OWNER_ID = os.getenv("OWNER_ID", "123456789")  # String အနေနဲ့ ထားပါ
+OWNER_ID = os.getenv("OWNER_ID", "123456789")
 
 # Database
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///default.db")
 
-# Chats (အားလုံးကို String အနေနဲ့ ထားပြီးမှ လိုအပ်ရင် int() နဲ့ ပြောင်းပါ)
-AUTH_CHAT = os.getenv("AUTH_CHAT", "-100123456789")  # String အနေနဲ့ ထားပါ
-LOGS_CHAT = os.getenv("LOGS_CHAT", "-1001234567891")  # String အနေနဲ့ ထားပါ
-POST_CHAT = os.getenv("POST_CHAT", "-1001234567891")  # String အနေနဲ့ ထားပါ
+# Chats
+AUTH_CHAT = os.getenv("AUTH_CHAT", "-100123456789")
+LOGS_CHAT = int(os.getenv("LOGS_CHAT", "-1001234567891"))
+POST_CHAT = int(os.getenv("POST_CHAT", "-1001234567891"))
 
 # Admin Credentials
 ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
@@ -55,6 +55,5 @@ USE_CAPTION = os.getenv("USE_CAPTION", "False").lower() in ("true", "1", "yes")
 PORT = int(os.getenv("PORT", "10000"))
 
 # Derived and Protected Variables (Don't Touch)
-# ဒီနေရာမှာ int() နဲ့ ပြောင်းပါ
-SUDO_USERS = [int(x) for x in str(OWNER_ID).split()]
-AUTH_CHATS = [int(x) for x in str(AUTH_CHAT).split()]
+SUDO_USERS = [int(x) for x in OWNER_ID.split()]
+AUTH_CHATS = [int(x) for x in AUTH_CHAT.split()]
