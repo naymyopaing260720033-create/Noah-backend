@@ -1,55 +1,59 @@
-# Main configuration file
+# Load environment variables
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Mandatory Variables
-API_ID = 1111111 # Replace with your actual Telegram API ID
-API_HASH = "your_api_hash_here"  # Replace with your actual Telegram API Hash
-BOT_TOKEN = "your_bot_token_here"  # Replace with your actual Bot Token
-OWNER_ID = "11111111"  # Replace with your actual Owner ID
+API_ID = int(os.getenv("API_ID", "1234567"))
+API_HASH = os.getenv("API_HASH", "default_api_hash")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "default_bot_token")
+OWNER_ID = os.getenv("OWNER_ID", "123456789")
+
 # Database
-DATABASE_URL = "your_database_url_here"  # Replace with your actual database URL
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///default.db")
 
-AUTH_CHAT = "-100123456789 -1001234567890" # Replace with your actual auth chat ID. You can use multiple IDs separated by ( space ).
-LOGS_CHAT = -1001234567891 # Replace with your actual logs chat ID
-POST_CHAT = -1001234567891 # Replace with your actual post chat ID
+# Chats
+AUTH_CHAT = os.getenv("AUTH_CHAT", "-100123456789")
+LOGS_CHAT = int(os.getenv("LOGS_CHAT", "-1001234567891"))
+POST_CHAT = int(os.getenv("POST_CHAT", "-1001234567891"))
 
-ADMIN_USERNAME = "admin" # Replace with your admin username
-ADMIN_PASSWORD = "adminadmin" # Replace with your admin password
+# Admin Credentials
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME", "admin")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "adminadmin")
 
+# Site Configs
+SITE_SECRET = os.getenv("SITE_SECRET", "defaultsecretkey")
+TMDB_API_KEY = os.getenv("TMDB_API_KEY", "")
 
-SITE_SECRET = "your_secret_key" # Replace with your site secret key
-TMDB_API_KEY = "" # Replace with your TMDB API key
+SITE_NAME = os.getenv("SITE_NAME", "reelnn")
+POST_CHAT_LINK = os.getenv("POST_CHAT_LINK", "https://t.me/reelnnUpdates")
+ENABLE_REGISTRATION = os.getenv("ENABLE_REGISTRATION", "False").lower() in ("true", "1", "yes")
+
+SIGNUP_IMAGE = os.getenv("SIGNUP_IMAGE", "https://i.ibb.co/dJ2t5bsF/anime-AI-1.jpg")
+SIGNUP_MESSAGE = os.getenv("SIGNUP_MESSAGE", """
+**Heyaa** 🙋🏻‍♀️\n
+**Welcome to DocKeeper!** 🎬 
+Your ultimate destination for entertainment!
+To get started and access our media library,
+please register your account.
+
+👉 Use the /register command to sign up for the site.
+""")
 
 # Optional Variables
-
-# If you want to use multiple bot tokens, uncomment the MULTI_TOKENS dictionary and add your tokens. this aditional bots will speed up the process of downloading and streaming files.
 MULTI_TOKENS = {
-    # 1: "BOT_TOKEN_1_HERE",
-    # 2: "BOT_TOKEN_2_HERE",
-    # Add more tokens as needed
+    # 1: os.getenv("MULTI_BOT_TOKEN_1"),
+    # 2: os.getenv("MULTI_BOT_TOKEN_2"),
+    # Add more if needed
 }
-DELETE_AFTER_MINUTES = 10 # Set the number of minutes after which files will be deleted from user message
-POST_UPDATES = True # Set to True if you want to post updates in the post chat
-USE_CAPTION = False # Set to True if you want to use captions for posts instead of file names.
+
+DELETE_AFTER_MINUTES = int(os.getenv("DELETE_AFTER_MINUTES", "10"))
+POST_UPDATES = os.getenv("POST_UPDATES", "True").lower() in ("true", "1", "yes")
+USE_CAPTION = os.getenv("USE_CAPTION", "False").lower() in ("true", "1", "yes")
 
 # Port configuration
-import os
-PORT = int(os.environ.get("PORT", 6519))
+PORT = int(os.getenv("PORT", "10000"))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# (Don't touch this unless you know what you're doing)
-SUDO_USERS = [int(x) for x in (OWNER_ID).split()]
-AUTH_CHATS = [int(x) for x in (AUTH_CHAT).split()]
+# Derived and Protected Variables (Don't Touch)
+SUDO_USERS = [int(x) for x in OWNER_ID.split()]
+AUTH_CHATS = [int(x) for x in AUTH_CHAT.split()]
