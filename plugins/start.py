@@ -156,7 +156,11 @@ async def forward_(client: Client, message: Message):
             await message.reply_text(f"Sorry, an error occurred while processing your request.")
 
 
-# @Client.on_message(filters.command("start", prefixes="/") & filters.private)
-# async def start_command(client: Client, message: Message):
-#     await message.reply_text("Hello! I am your bot. How can I assist you today?")
-
+# ✅ START COMMAND HANDLER - Comment ဖြုတ်လိုက်ပါ
+@Client.on_message(filters.command("start", prefixes="/") & filters.private)
+async def start_command(client: Client, message: Message):
+    # Config ထဲက SIGNUP_MESSAGE ကိုသုံးမယ်
+    await message.reply_text(
+        config.SIGNUP_MESSAGE,
+        disable_web_page_preview=True
+    )
