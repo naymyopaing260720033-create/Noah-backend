@@ -35,10 +35,6 @@ SIGNUP_MESSAGE = os.getenv("SIGNUP_MESSAGE", """
 **Welcome to DocKeeper!** 🎬 
 Your ultimate destination for entertainment!
 To get started and access our media library,
-please register your account.
-
-👉 Use the /register command to sign up for the site.
-""")
 
 # Optional Variables
 MULTI_TOKENS = {
